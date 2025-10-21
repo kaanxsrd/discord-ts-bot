@@ -1,7 +1,7 @@
 {
 	"name": "vaneta",
 	"description": "🚀 A blazing-fast, multipurpose Discord bot built with TypeScript, Bun, and Drizzle. Features include moderation, utility, fun commands, and scalable architecture.",
-	"repository": "github:kaanxsrd/moderation-bot",
+	"repository": "github:kaanxsrd/moderation-discord-bot",
 	"author": "Kaan 'Vante' Karahanlı <contact@vante.app>",
 	"homepage": "https://vante.app/",
 	"version": "1.0.0",
