@@ -1,0 +1,27 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running Biome auto-fix before push..."
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+if command -v bunx >/dev/null 2>&1; then
+  bunx biome check --write || true
+else
+  npx biome check --write || true
+fi
+
+if [ -n "$(git status --porcelain)" ]; then
+  echo "Staging and committing Biome fixes..."
+  git add -A
+  git commit -m "chore: auto-format with Biome (pre-push)" || true
+fi
+
+echo "Running TypeScript typecheck..."
+if command -v bunx >/dev/null 2>&1; then
+  bunx tsc --noEmit
+else
+  npx tsc --noEmit
+fi
+
+echo "Pre-push checks complete."
