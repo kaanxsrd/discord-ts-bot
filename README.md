@@ -5,6 +5,12 @@
 > [!NOTE]
 > This project is currently under active development. Daily updates, including routine commits, continuous integration improvements, and documentation enhancements, can be expected until completion.
 
+## 📊 Progress
+
+See detailed progress and current tasks in **[TODO.md](./TODO.md)**
+
+Current Phase: **Core Infrastructure Setup** (Commands & Events Handler + Loader)
+
 ## ✨ Features
 
 - ⚙️ Fully modular command and event structure

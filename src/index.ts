@@ -7,4 +7,8 @@ const client = new Vaneta({
 	partials: Object.values(Partials) as Partials[],
 });
 
+client.loadCommands('src/app/commands');
+client.loadContexts('src/app/contexts');
+client.loadEvents('src/app/events');
+
 client.init(env.DISCORD_BOT_TOKEN);

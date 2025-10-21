@@ -26,7 +26,7 @@
 		"zod": "^4.1.12"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.6",
+		"@biomejs/biome": "^2.2.6",
 		"@types/bun": "latest",
 		"@types/signale": "^1.4.7",
 		"husky": "^8.0.0"
