@@ -31,11 +31,11 @@ export class handler {
 			config.commandCooldowns.windowDuration,
 		);
 
-		if (cooldown.hasLimit) {
+		if (cooldown.hasLimit && cooldown.delete) {
 			client.send(
 				context,
 				`You're doing things too quickly! Please slow down — you can run commands again ${cooldown.time}.`,
-				cooldown.delete! - Date.now(),
+				cooldown.delete - Date.now(),
 			);
 			return true;
 		}
@@ -47,11 +47,11 @@ export class handler {
 				config.commandCooldowns.maxAttempts,
 				config.commandCooldowns.windowDuration,
 			);
-			if (commandCooldown.hasLimit) {
+			if (commandCooldown.hasLimit && commandCooldown.delete) {
 				client.send(
 					context,
 					`That command is on cooldown! You can use it again ${commandCooldown.time}.`,
-					commandCooldown.delete! - Date.now(),
+					commandCooldown.delete - Date.now(),
 				);
 				return true;
 			}
@@ -61,9 +61,9 @@ export class handler {
 	}
 
 	async slashCommand(
-		client: Vaneta,
-		interaction: ChatInputCommandInteraction,
-		command: Command,
+		_client: Vaneta,
+		_interaction: ChatInputCommandInteraction,
+		_command: Command,
 	) {}
 
 	async contextCommand(
