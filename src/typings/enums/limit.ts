@@ -1,3 +1,3 @@
 export enum LimitFlags {
-  Command,
+	Command,
 }
