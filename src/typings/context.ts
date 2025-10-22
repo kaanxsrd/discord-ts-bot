@@ -11,5 +11,6 @@ export interface ContextData {
 	cooldown: number;
 	enabled: boolean;
 	ephemeral: boolean;
-	execute: (client: Vaneta, ctx: ContextMenuCommandInteraction) => void;
+	maintanence?: boolean;
+	execute: (client: Vaneta, ctx: ContextMenuCommandInteraction) => unknown;
 }

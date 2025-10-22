@@ -9,7 +9,7 @@ export class Command {
 	public memberPerms?: CommandData['memberPerms'];
 	public clientPerms?: CommandData['clientPerms'];
 	public slash: CommandData['slash'];
-	public maintanence: CommandData['maintanence'];
+	public maintanence?: CommandData['maintanence'];
 	public options: CommandData['options'];
 
 	constructor(options: CommandData) {

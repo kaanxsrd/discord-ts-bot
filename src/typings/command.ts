@@ -11,7 +11,7 @@ export interface CommandData {
 	memberPerms?: string[];
 	clientPerms?: string[];
 	slash: boolean;
-	maintanence: boolean;
+	maintanence?: boolean;
 	options: APIApplicationCommandOption[];
-	execute: (client: Vaneta, ctx: Context, args: string[]) => void;
+	execute: (client: Vaneta, ctx: Context, args: string[]) => unknown;
 }

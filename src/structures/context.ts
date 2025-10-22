@@ -7,6 +7,8 @@ export class Context {
 	public cooldown: ContextData['cooldown'];
 	public enabled: ContextData['enabled'];
 	public ephemeral: ContextData['ephemeral'];
+	public maintanence?: ContextData['maintanence'];
+	public execute: ContextData['execute'];
 
 	constructor(options: ContextData) {
 		this.name = options.name;
@@ -15,5 +17,7 @@ export class Context {
 		this.cooldown = options.cooldown;
 		this.enabled = options.enabled;
 		this.ephemeral = options.ephemeral;
+		this.maintanence = options.maintanence;
+		this.execute = options.execute;
 	}
 }

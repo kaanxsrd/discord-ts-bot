@@ -6,7 +6,7 @@ export type EventKeys = keyof ClientEvents;
 export type EventExecute<K extends EventKeys> = (
 	client: Vaneta,
 	...args: ClientEvents[K]
-) => Promise<void> | void;
+) => Promise<unknown> | unknown;
 
 export interface EventData<K extends EventKeys> {
 	name: K;
