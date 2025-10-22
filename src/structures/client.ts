@@ -10,8 +10,6 @@ import { recursiveReadDirSync } from '@/utils/common/loader';
 export class Vaneta extends Client {
 	public commands: Collection<string, CommandData> = new Collection();
 	public contexts: Collection<string, ContextData> = new Collection();
-	public events: Collection<string, EventData<keyof ClientEvents>> =
-		new Collection();
 	public cooldowns = new Cooldown();
 	public logger = new Logger();
 
@@ -57,7 +55,6 @@ export class Vaneta extends Client {
 					this.logger.warn(`Invalid event file: ${file}`);
 					return;
 				}
-				this.events.set(event.name, event);
 				this.on(
 					event.name as keyof ClientEvents,
 					event.execute.bind(null, this),
