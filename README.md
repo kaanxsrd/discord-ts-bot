@@ -7,7 +7,7 @@
 
 ## 📊 Progress
 
-See detailed progress and current tasks in **[TODO.md](./TODO.md)**
+See detailed progress and current tasks in **[TODO](./TODO.md)**
 
 Current Phase: **Core Infrastructure Setup** (Commands & Events Handler + Loader)
 
@@ -22,7 +22,7 @@ Current Phase: **Core Infrastructure Setup** (Commands & Events Handler + Loader
 
 ## ⁉️ Issues
 
-If you have any issues with the page please create [new issue here](https://github.com/kaanxsrd/moderation-discord-bot/issues). When creating new issue please provide as much information as possible. If you can, please provide logs from console.
+If you have any issues with the page please create [new issue here](https://github.com/kaanxsrd/discord-ts-bot/issues). When creating new issue please provide as much information as possible. If you can, please provide logs from console.
 
 We will review your pull request as soon as possible. We might suggest some changes or improvements.
 
@@ -30,10 +30,10 @@ We will review your pull request as soon as possible. We might suggest some chan
 
 When submitting a pull request:
 
-- Clone the repository (`git clone https://github.com/kaanxsrd/moderation-discord-bot`)
+- Clone the repository (`git clone https://github.com/kaanxsrd/discord-ts-bot`)
 - Create a branch off of `master` and give it a meaningful name (e.g. `my-awesome-new-feature`).
-- Open a [pull request](https://github.com/kaanxsrd/moderation-discord-bot/pulls) on [GitHub](https://github.com) and describe the feature or fix.
+- Open a [pull request](https://github.com/kaanxsrd/discord-ts-bot/pulls) on [GitHub](https://github.com) and describe the feature or fix.
 
 ## 📋 License
 
-This project is licensed under the GPL-3.0. See the [LICENSE](https://github.com/kaanxsrd/moderation-discord-bot/blob/master/LICENSE) file for details
+This project is licensed under the GPL-3.0. See the [LICENSE](https://github.com/kaanxsrd/discord-ts-bot/blob/main/LICENSE) file for details

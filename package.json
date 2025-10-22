@@ -38,7 +38,7 @@
 		"displayScope": true,
 		"displayBadge": true,
 		"displayDate": true,
-		"displayFilename": true,
+		"displayFilename": false,
 		"displayLabel": true,
 		"displayTimestamp": true,
 		"underlineLabel": true

@@ -39,10 +39,6 @@ const options: SignaleOptions = {
 			label: 'log',
 		},
 	},
-
-	config: {
-		displayFilename: false,
-	},
 };
 
 export default class Logger extends Package.Signale {
