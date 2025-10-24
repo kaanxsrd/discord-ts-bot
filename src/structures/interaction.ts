@@ -1,47 +1,49 @@
 import {
 	ChatInputCommandInteraction,
+	type InteractionEditReplyOptions,
+	type InteractionReplyOptions,
 	Message,
-	type MessagePayload,
+	type MessageCreateOptions,
 } from 'discord.js';
 import type {
 	ContextData,
 	DeferMessageContent,
 	EditMessageContent,
+	MessageContent,
 } from '@/typings/interaction';
 import type { Vaneta } from './client';
 
 export class Context {
-	public readonly ctx: ContextData['ctx'];
-	public readonly interaction: ContextData['interaction'];
-	public readonly message: ContextData['message'];
-	public readonly id: ContextData['id'];
-	public readonly channelId: ContextData['channelId'];
-	public readonly client: ContextData['client'];
-	public readonly author: ContextData['author'];
-	public readonly channel: ContextData['channel'];
-	public readonly guild: ContextData['guild'];
-	public readonly createdAt: ContextData['createdAt'];
-	public readonly createdTimestamp: ContextData['createdTimestamp'];
-	public readonly member: ContextData['member'];
+	public ctx: ContextData['ctx'];
+	public interaction: ContextData['interaction'];
+	public message: ContextData['message'];
+	public id: ContextData['id'];
+	public channelId: ContextData['channelId'];
+	public client: ContextData['client'];
+	public author: ContextData['author'];
+	public channel: ContextData['channel'];
+	public guild: ContextData['guild'];
+	public createdAt: ContextData['createdAt'];
+	public createdTimestamp: ContextData['createdTimestamp'];
+	public member: ContextData['member'];
 	public args: ContextData['args'];
 	public msg: ContextData['msg'];
 
-	constructor(options: ContextData) {
-		this.ctx = options.ctx;
-		this.interaction =
-			options.ctx instanceof ChatInputCommandInteraction ? options.ctx : null;
-		this.message = options.ctx instanceof Message ? options.ctx : null;
-		this.id = options.ctx.id;
-		this.channelId = options.ctx.channelId;
-		this.channel = options.ctx.channel;
-		this.client = options.ctx.client as Vaneta;
-		this.author =
-			options.ctx instanceof Message ? options.ctx.author : options.ctx.user;
-		this.guild = options.ctx.guild;
-		this.createdAt = options.ctx.createdAt;
-		this.createdTimestamp = options.ctx.createdTimestamp;
-		this.member = options.ctx.member;
-		this.args = options.args;
+	constructor(ctx: ChatInputCommandInteraction | Message, args: unknown[]) {
+		this.ctx = ctx;
+		this.interaction = ctx instanceof ChatInputCommandInteraction ? ctx : null;
+		this.message = ctx instanceof Message ? ctx : null;
+		this.channel = ctx.channel;
+		this.id = ctx.id;
+		this.channelId = ctx.channelId;
+		this.client = ctx.client as Vaneta;
+		this.author = ctx instanceof Message ? ctx.author : ctx.user;
+		this.guild = ctx.guild;
+		this.createdAt = ctx.createdAt;
+		this.createdTimestamp = ctx.createdTimestamp;
+		this.member = ctx.member;
+		this.args = args as ContextData['args'];
+		this.setArgs(args);
 		this.msg = undefined;
 	}
 
@@ -49,34 +51,50 @@ export class Context {
 		return this.ctx instanceof ChatInputCommandInteraction;
 	}
 
-	public async sendMessage(content: MessagePayload): Promise<Message> {
+	public setArgs(args: unknown[]): void {
+		if (this.isInteraction) {
+			this.args = args
+				.filter(
+					(arg): arg is { value: unknown } =>
+						typeof arg === 'object' && arg !== null && 'value' in arg,
+				)
+				.map((arg) => arg.value) as ContextData['args'];
+		} else {
+			this.args = args as ContextData['args'];
+		}
+	}
+
+	public async sendMessage(content: MessageContent): Promise<Message> {
 		if (this.isInteraction && this.interaction) {
-			await this.interaction.reply(content);
-			const reply = await this.interaction.fetchReply();
-			this.msg = reply;
-			return reply;
+			this.msg = (await this.interaction.reply(
+				content as InteractionReplyOptions,
+			)) as unknown as Message;
+			return this.msg;
 		}
 
 		if (this.message?.channel?.isSendable()) {
-			const sent = await this.message.channel.send(content);
-			this.msg = sent;
-			return sent;
+			this.msg = await this.message.channel.send(
+				content as MessageCreateOptions,
+			);
+			return this.msg;
 		}
 
 		throw new Error('Unable to send message - no valid channel or interaction');
 	}
 
 	public async editMessage(content: EditMessageContent): Promise<Message> {
-		if (this.isInteraction && this.interaction) {
-			const reply = await this.interaction.editReply(content);
-			this.msg = reply;
-			return reply;
+		if (this.isInteraction && this.interaction && this.msg) {
+			this.msg = (await this.interaction.editReply(
+				content as InteractionEditReplyOptions,
+			)) as unknown as Message;
+			return this.msg;
 		}
 
 		if (this.msg) {
-			const edited = await this.msg.edit(content);
-			this.msg = edited;
-			return edited;
+			this.msg = await this.msg.edit(
+				content as unknown as InteractionEditReplyOptions,
+			);
+			return this.msg;
 		}
 
 		throw new Error('No message to edit');
@@ -87,15 +105,15 @@ export class Context {
 	): Promise<Message> {
 		if (this.isInteraction && this.interaction) {
 			await this.interaction.deferReply();
-			const reply = await this.interaction.fetchReply();
-			this.msg = reply;
-			return reply;
+			this.msg = (await this.interaction.fetchReply()) as unknown as Message;
+			return this.msg;
 		}
 
 		if (this.message?.channel?.isSendable()) {
-			const sent = await this.message.channel.send(content);
-			this.msg = sent;
-			return sent;
+			this.msg = await this.message.channel.send(
+				content as MessageCreateOptions,
+			);
+			return this.msg;
 		}
 
 		throw new Error(
@@ -104,14 +122,19 @@ export class Context {
 	}
 
 	public async sendFollowUp(
-		content: MessagePayload,
+		content: MessageContent,
 	): Promise<Message | undefined> {
 		if (this.isInteraction && this.interaction) {
-			return await this.interaction.followUp(content);
-		} else if (this.message?.channel?.isSendable()) {
-			const sent = await this.message.channel.send(content);
-			this.msg = sent;
-			return sent;
+			return (await this.interaction.followUp(
+				content as InteractionReplyOptions,
+			)) as unknown as Message;
+		}
+
+		if (this.message?.channel?.isSendable()) {
+			this.msg = await this.message.channel.send(
+				content as MessageCreateOptions,
+			);
+			return this.msg;
 		}
 	}
 
@@ -121,19 +144,22 @@ export class Context {
 
 	public readonly options = {
 		getRole: (name: string, required = true) => {
-			return this.interaction?.options.get(name, required)?.role;
+			return this.interaction?.options.getRole(name, required);
 		},
-		getMember: (name: string, required = true) => {
-			return this.interaction?.options.get(name, required)?.member;
+		getMember: (name: string) => {
+			return this.interaction?.options.getMember(name);
+		},
+		getUser: (name: string, required = true) => {
+			return this.interaction?.options.getUser(name, required);
 		},
 		get: (name: string, required = true) => {
 			return this.interaction?.options.get(name, required);
 		},
 		getChannel: (name: string, required = true) => {
-			return this.interaction?.options.get(name, required)?.channel;
+			return this.interaction?.options.getChannel(name, required);
 		},
 		getSubCommand: () => {
-			return this.interaction?.options.data?.[0]?.name;
+			return this.interaction?.options.getSubcommand(false);
 		},
 	};
 }

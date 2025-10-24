@@ -5,11 +5,12 @@ import type { Context } from '@/structures/interaction';
 export interface CommandData {
 	name: string;
 	description: string;
+	usage: string;
 	category: string;
 	cooldown: number;
 	aliases: string[];
-	memberPerms?: string[];
-	clientPerms?: string[];
+	memberPerms?: bigint[];
+	clientPerms?: bigint[];
 	slash: boolean;
 	maintanence?: boolean;
 	options: APIApplicationCommandOption[];
