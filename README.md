@@ -9,8 +9,6 @@
 
 See detailed progress and current tasks in **[TODO](./TODO.md)**
 
-Current Phase: **Core Infrastructure Setup** (Commands & Events Handler + Loader)
-
 ## ✨ Features
 
 - ⚙️ Fully modular command and event structure
