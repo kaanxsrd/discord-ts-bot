@@ -6,14 +6,17 @@ import { Pool } from 'pg';
 
 import { env } from '@/env';
 import Logger from '@/structures/logger';
-import * as pgSchema from './schema/postgres';
+import * as serverSchema from './schema/server';
+import * as pgSchema from './schema/user';
+
+const schema = { ...pgSchema, ...serverSchema };
 
 const logger = new Logger();
 
 export type DatabaseContext = {
 	kind: 'postgres';
-	db: NodePgDatabase<typeof pgSchema>;
-	schema: typeof pgSchema;
+	db: NodePgDatabase<typeof schema>;
+	schema: typeof schema;
 	pool: Pool;
 };
 
@@ -39,8 +42,8 @@ async function createDatabase(): Promise<DatabaseContext> {
 
 	return {
 		kind: 'postgres',
-		db: drizzlePg(pool, { schema: pgSchema }),
-		schema: pgSchema,
+		db: drizzlePg(pool, { schema }),
+		schema,
 		pool,
 	};
 }

@@ -4,23 +4,6 @@
 
 ### In Progress 🔄
 
-#### Database Implementation
-- [ ] Drizzle ORM setup and configuration
-- [ ] Database schema design
-  - [ ] User profiles & moderation history
-  - [ ] Server settings & configuration
-  - [ ] Moderation logs
-- [ ] Connection pooling & optimization
-- [ ] Migration scripts
-
-#### Docker Setup
-- [ ] Dockerfile configuration
-- [ ] Docker Compose for services
-- [ ] Environment variable management
-- [ ] Production deployment setup
-
-### Upcoming 📋
-
 #### New Commands
 - [ ] Moderation utilities
   - [ ] Ban/Kick user commands
@@ -38,6 +21,11 @@
 - [ ] Command usage logging
 - [ ] Server activity overview
 
+
+### Upcoming 📋
+
+### I DONT KNOW WALLAHI ILL THINK ABOUT THAT AFTER
+
 ### Completed ✅
 - [x] Project structure initialization
 - [x] TypeScript configuration
@@ -51,6 +39,17 @@
 - [x] Permission system with human-readable formatting
 - [x] Error handling in command execution
 - [x] Eval command utility (TypeScript transpilation)
+- [x] Drizzle ORM setup and configuration
+- [x] Database schema design
+  - [x] User profiles & moderation history
+  - [x] Server settings & configuration
+  - [x] Moderation logs
+- [x] Connection pooling & optimization
+- [x] Migration scripts
+- [x] Dockerfile configuration
+- [x] Docker Compose for services
+- [x] Environment variable management
+- [x] Production deployment setup
 
 ---
 

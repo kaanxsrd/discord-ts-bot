@@ -4,9 +4,9 @@ import { initDatabase } from '@/infrastructure/database';
 import Logger from '@/structures/logger';
 
 type PostgresRow =
-	typeof import('@/infrastructure/database/schema/postgres').users.$inferSelect;
+	typeof import('@/infrastructure/database/schema/user').users.$inferSelect;
 type PostgresInsert =
-	typeof import('@/infrastructure/database/schema/postgres').users.$inferInsert;
+	typeof import('@/infrastructure/database/schema/user').users.$inferInsert;
 type UserRow = PostgresRow;
 type UserInsert = PostgresInsert;
 
