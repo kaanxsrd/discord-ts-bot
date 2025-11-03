@@ -2,7 +2,7 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=Vaneta%20Bot&fontSize=90&animation=fadeIn&fontAlignY=38&desc=A%20blazing-fast%20Discord%20bot%20built%20with%20TypeScript,%20Bun%20and%20Drizzle.&descAlignY=55&descAlign=50" alt="Vaneta Bot banner" />
 </p>
 
-> **Note**  
+> [!NOTE]
 > Vaneta is under active development. Expect frequent updates while we stabilise the core feature set and infrastructure.
 
 ## Features
