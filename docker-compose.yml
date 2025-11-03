@@ -11,8 +11,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - ./var/data:/app/var/data
 
   db:
     image: postgres:16-alpine
