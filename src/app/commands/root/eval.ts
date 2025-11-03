@@ -9,7 +9,6 @@ import {
 } from 'discord.js';
 import { env } from '@/env';
 import { Command } from '@/structures/command';
-import evalUtil from '@/utils/common/eval';
 
 export default new Command({
 	name: 'eval',
@@ -31,7 +30,10 @@ export default new Command({
 	async execute(client, ctx, args) {
 		const code = args.join(' ');
 		try {
-			let evaled = evalUtil(code);
+			const isAsync = code.includes('await ') || code.includes('return ');
+			const wrappedCode = isAsync ? `(async () => { ${code} })()` : code;
+			// biome-ignore lint/security/noGlobalEval: Required for eval command
+			let evaled = await eval(wrappedCode);
 
 			if (typeof evaled !== 'string') {
 				evaled = util.inspect(evaled, { depth: 1 });

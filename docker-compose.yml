@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgres://bot:botpassword@db:5432/vaneta
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./var/data:/app/var/data
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vaneta
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: babayizordurdururlar
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d vaneta -U bot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:

@@ -17,18 +17,26 @@
 		"typecheck": "bunx tsc --noEmit",
 		"check": "bunx biome check --write",
 		"ci:check": "bunx biome check && bunx tsc --noEmit",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"db:generate": "bunx drizzle-kit generate",
+		"db:push": "bunx drizzle-kit push",
+		"db:studio": "bunx drizzle-kit studio"
 	},
 	"dependencies": {
 		"@t3-oss/env-core": "^0.13.8",
+		"drizzle-orm": "^0.32.0",
 		"discord.js": "^14.23.2",
+		"dotenv": "^16.4.5",
+		"pg": "^8.11.5",
 		"signale": "^1.4.0",
 		"zod": "^4.1.12"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.2.6",
 		"@types/bun": "latest",
+		"@types/pg": "^8.15.6",
 		"@types/signale": "^1.4.7",
+		"drizzle-kit": "^0.22.4",
 		"husky": "^8.0.0"
 	},
 	"peerDependencies": {

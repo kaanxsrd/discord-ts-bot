@@ -153,9 +153,11 @@ export class Vaneta extends Client {
 	}
 
 	public async init(token: string): Promise<void> {
-		await this.login(token).catch((err) => {
+		try {
+			await this.login(token);
+		} catch (err) {
 			this.logger.error(`Failed to login: ${err}`);
-			process.exit(1);
-		});
+			throw err;
+		}
 	}
 }

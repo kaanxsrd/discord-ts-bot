@@ -1,0 +1,10 @@
+# Prevent local build artifacts from bloating the Docker context.
+node_modules
+.git
+.github
+.vscode
+.husky
+.env
+.env.local
+*.log
+var/data

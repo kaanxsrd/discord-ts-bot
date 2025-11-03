@@ -6,6 +6,8 @@
 		"baseUrl": "./src",
 		"paths": {
 			"@/*": ["*"],
+			"@/infrastructure/*": ["infrastructure/*"],
+			"@/modules/*": ["modules/*"],
 			"@/structures/*": ["structures/*"],
 			"@/typings/*": ["typings/*"],
 			"@/typings/enums/*": ["typings/enums/*"],
